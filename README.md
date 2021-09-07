@@ -45,6 +45,10 @@ A struct implementing `Iterator<Item=U>`. Size of this struct is the same as siz
 
 `next` method generates a next bit combination of the current state. The generated value is always smaller than the next state.
 
+## Special Thanks
+
+The algorithm was borrowed from [the blog post][thanks-herumi] by [@herumi](https://github.com/herumi).
+
 ## License
 
 Distributed under [the MIT License](./LICENSE.txt).
@@ -54,3 +58,4 @@ Distributed under [the MIT License](./LICENSE.txt).
 [ci]: https://github.com/rhysd/bit_combi_iter/actions/workflows/ci.yaml
 [doc]: https://docs.rs/crate/bit_combi_iter
 [crate-badge]: https://img.shields.io/crates/v/bit_combi_iter.svg
+[thanks-herumi]: https://github.com/herumi/blog/blob/main/bit-operation.md#%E3%83%93%E3%83%83%E3%83%88%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B%E3%81%AE%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3

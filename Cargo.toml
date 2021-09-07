@@ -2,6 +2,14 @@
 name = "bit_combi_iter"
 version = "0.1.0"
 edition = "2018"
+authors = ["rhysd <lin90162@yahoo.co.jp>"]
+description = "Iterator to iterate bit combinations"
+license = "MIT"
+homepage = "https://github.com/rhysd/bit_combi_iter#readme"
+repository = "https://github.com/rhysd/bit_combi_iter"
+readme = "README.md"
+categories = ["algorithms"]
+keywords = ["bit", "combinations", "iterator"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

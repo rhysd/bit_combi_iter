@@ -1,7 +1,9 @@
 bit_combi_iter
 ==============
+[![crates.io][crate-badge]][crate]
+[![CI][ci-badge]][ci]
 
-bit_combi_iter is a small dependency-free crate to enumerate all bit combinations less than given unsigned integer value keeping the number of bits.
+[bit_combi_iter][crate] is a small dependency-free crate to enumerate all bit combinations less than given unsigned integer value keeping the number of bits.
 
 ```rust
 use bit_combi_iter::BitCombinations;
@@ -46,3 +48,9 @@ A struct implementing `Iterator<Item=U>`. Size of this struct is the same as siz
 ## License
 
 Distributed under [the MIT License](./LICENSE.txt).
+
+[crate]: https://crates.io/crates/bit_combi_iter
+[ci-badge]: https://github.com/rhysd/bit_combi_iter/actions/workflows/ci.yaml/badge.svg
+[ci]: https://github.com/rhysd/bit_combi_iter/actions/workflows/ci.yaml
+[doc]: https://docs.rs/crate/bit_combi_iter
+[crate-badge]: https://img.shields.io/crates/v/bit_combi_iter.svg

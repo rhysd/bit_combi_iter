@@ -1,0 +1,35 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Rust
+        run: |
+          rustup set profile minimal
+          rustup toolchain update stable --no-self-update
+          rustup default stable
+          rustup show
+      - run: cargo test
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check workflow files
+        run: |
+          bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+          ./actionlint -color
+        shell: bash
+      - name: Install Rust
+        run: |
+          rustup set profile minimal
+          rustup toolchain update stable --no-self-update
+          rustup default stable
+          rustup component add rustfmt clippy
+          rustup show
+          cargo fmt --version
+          cargo clippy --version
+      - run: cargo fmt -- --color always --check
+      - run: cargo clippy --color always --all -- -D warnings

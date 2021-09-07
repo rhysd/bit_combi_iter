@@ -47,6 +47,10 @@ A struct implementing `Iterator<Item=U>`. Size of this struct is the same as siz
 
 `next` method generates a next bit combination of the current state. The generated value is always smaller than the next state.
 
+### `BitCombinations::<U>::peek(self) -> Option<U>`
+
+`peek` method returns the current state. When the iterator finished iterating all combinations, this method returns `None`.
+
 ## Special Thanks
 
 The algorithm was borrowed from [the blog post][thanks-herumi] by [@herumi](https://github.com/herumi).

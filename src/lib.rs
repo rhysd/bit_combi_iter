@@ -1,6 +1,7 @@
 // Algorithm borrowed from https://github.com/herumi/misc/blob/d7480b29348841779793edd9d245a834ca1e730f/combination2.cpp
 
-pub trait UIntExt: Sized + Clone + Copy {
+pub trait UIntExt: Sized + Clone + Copy + PartialEq {
+    const ZERO: Self;
     fn next_combination(self) -> Option<Self>;
 }
 
@@ -8,6 +9,7 @@ macro_rules! impl_uint {
     [$($t:ty)+] => {
         $(
             impl UIntExt for $t {
+                const ZERO: Self = 0;
                 fn next_combination(self) -> Option<Self> {
                     let a = self;
                     let b = a ^ a.wrapping_add(1);
@@ -33,15 +35,22 @@ impl<U: UIntExt> BitCombinations<U> {
     pub fn new(start: U) -> BitCombinations<U> {
         BitCombinations(start)
     }
+
+    pub fn peek(self) -> Option<U> {
+        if self.0 == U::ZERO {
+            None
+        } else {
+            Some(self.0)
+        }
+    }
 }
 
 impl<U: UIntExt> Iterator for BitCombinations<U> {
     type Item = U;
+
     fn next(&mut self) -> Option<Self::Item> {
         let ret = self.0.next_combination();
-        if let Some(n) = ret {
-            self.0 = n;
-        }
+        self.0 = ret.unwrap_or(U::ZERO);
         ret
     }
 }
@@ -86,8 +95,11 @@ mod tests {
         for j in array::IntoIter::new(want) {
             let i = c.next().unwrap();
             assert_eq!(i, j, "left={:b}, right={:b}", i, j);
+            let i = c.peek().unwrap();
+            assert_eq!(i, j, "left={:b}, right={:b}", i, j);
         }
         assert!(c.next().is_none());
+        assert!(c.peek().is_none());
     }
 
     #[test]

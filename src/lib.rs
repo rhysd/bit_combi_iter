@@ -1,6 +1,6 @@
 // Algorithm borrowed from https://github.com/herumi/misc/blob/d7480b29348841779793edd9d245a834ca1e730f/combination2.cpp
 
-pub trait UIntExt: Sized + Copy {
+pub trait UIntExt: Sized + Clone + Copy {
     fn next_combination(self) -> Option<Self>;
 }
 
@@ -26,6 +26,7 @@ macro_rules! impl_uint {
 
 impl_uint![u8 u16 u32 u64 u128];
 
+#[derive(Clone, Copy)]
 pub struct BitCombinations<U: UIntExt>(U);
 
 impl<U: UIntExt> BitCombinations<U> {

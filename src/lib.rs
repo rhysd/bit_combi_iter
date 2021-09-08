@@ -13,7 +13,7 @@ macro_rules! impl_uint {
                 fn next_combination(self) -> Option<Self> {
                     let a = self;
                     let b = a ^ a.wrapping_add(1);
-                    let c = a.wrapping_sub(b / 2);
+                    let c = a.wrapping_sub(b >> 1);
                     if let Some(d) = b.checked_add(1) {
                         let e = c.wrapping_sub((c & c.wrapping_neg()) >> d.trailing_zeros());
                         if e != 0 { Some(e) } else { None }
@@ -62,7 +62,8 @@ mod tests {
 
     #[test]
     fn u8_2() {
-        let mut c = BitCombinations::new(0b11000000u8);
+        let u = 0b11000000u8;
+        let mut c = BitCombinations::new(u);
         let want = [
             0b10100000u8,
             0b10010000u8,
@@ -92,6 +93,8 @@ mod tests {
             0b00000101u8,
             0b00000011u8,
         ];
+        let i = c.peek().unwrap();
+        assert_eq!(i, u, "left={:b}, right={:b}", i, u);
         for j in array::IntoIter::new(want) {
             let i = c.next().unwrap();
             assert_eq!(i, j, "left={:b}, right={:b}", i, j);
@@ -138,13 +141,17 @@ mod tests {
 
     #[test]
     fn u8_8() {
-        let mut c = BitCombinations::new(0b11111111u8);
+        let u = 0b11111111u8;
+        let mut c = BitCombinations::new(u);
+        let i = c.peek().unwrap();
+        assert_eq!(i, u, "left={:b}, right={:b}", i, u);
         assert!(c.next().is_none());
     }
 
     #[test]
     fn u8_0() {
         let mut c = BitCombinations::new(0u8);
+        assert!(c.peek().is_none());
         assert!(c.next().is_none());
     }
 }

@@ -15,7 +15,7 @@ macro_rules! impl_uint {
                     let b = a ^ a.wrapping_add(1);
                     let c = a.wrapping_sub(b / 2);
                     if let Some(d) = b.checked_add(1) {
-                        let e = c.wrapping_sub((c & c.wrapping_neg()) / d);
+                        let e = c.wrapping_sub((c & c.wrapping_neg()) >> d.trailing_zeros());
                         if e != 0 { Some(e) } else { None }
                     } else {
                         None

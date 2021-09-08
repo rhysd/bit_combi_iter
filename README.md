@@ -34,7 +34,8 @@ BitCombinations::new(0b11100u8)
 // 11100
 // 11010
 // 11001
-// 01110
+// 10110
+// 10101
 // ...
 ```
 
@@ -47,23 +48,9 @@ Add this crate to dependencies in your `Cargo.toml`.
 bit_combi_iter = "1"
 ```
 
-## API
+## Document
 
-### `BitCombinations<U>` (`U` can be `u8`, `u16`, `u32`, `u64`, `u128`)
-
-A struct implementing `Iterator<Item=U>`. Size of this struct is the same as size of `U`. No additional allocation is necessary.
-
-### `BitCombinations::<U>::new(init: U) -> Self`
-
-`new` generates a `BitCombinations` instance initializing with state `init`.
-
-### `BitCombinations::<U>::next(&mut self) -> Option<U>`
-
-`next` method generates a next bit combination of the current state. The generated value is always smaller than the next state.
-
-### `BitCombinations::<U>::peek(self) -> Option<U>`
-
-`peek` method returns the current state. When the iterator finished iterating all combinations, this method returns `None`.
+See [the API document](https://docs.rs/bit_combi_iter).
 
 ## Special Thanks
 

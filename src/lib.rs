@@ -1,7 +1,56 @@
-// Algorithm borrowed from https://github.com/herumi/misc/blob/d7480b29348841779793edd9d245a834ca1e730f/combination2.cpp
+//! This crate is a small dependency-free crate to enumerate all bit combinations less than given unsigned integer value
+//! keeping the number of bits.
+//!
+//! ```
+//! use bit_combi_iter::BitCombinations;
+//!
+//! let mut c = BitCombinations::new(0b00010100u8);
+//!
+//! // Iterates all bit combinations less than 0b10100
+//! assert_eq!(c.next().unwrap(), 0b00010010);
+//! assert_eq!(c.next().unwrap(), 0b00010001);
+//! assert_eq!(c.next().unwrap(), 0b00001100);
+//! assert_eq!(c.next().unwrap(), 0b00001010);
+//! assert_eq!(c.next().unwrap(), 0b00001001);
+//! assert_eq!(c.next().unwrap(), 0b00000110);
+//! assert_eq!(c.next().unwrap(), 0b00000101);
+//! assert_eq!(c.next().unwrap(), 0b00000011);
+//!
+//! // After iterating all combinations, the iterator reaches the end
+//! assert!(c.next().is_none());
+//! ```
+//!
+//!  This crate is useful when you want to enumerate all `n` bit integers including `k` ones.
+//!
+//! ```
+//! # use bit_combi_iter::BitCombinations;
+//! // Enumerate all 5 bit integers including 3 ones (as u8)
+//! let mut c = BitCombinations::new(0b11100u8);
+//! assert_eq!(c.next().unwrap(), 0b11010);
+//! assert_eq!(c.next().unwrap(), 0b11001);
+//! assert_eq!(c.next().unwrap(), 0b10110);
+//! assert_eq!(c.next().unwrap(), 0b10101);
+//! assert_eq!(c.next().unwrap(), 0b10011);
+//! assert_eq!(c.next().unwrap(), 0b01110);
+//! // ...
+//! ```
+//!
+//!  The algorithm was borrowed from [the blog post][1] by [@herumi][2].
+//!
+//!  [1]: https://github.com/herumi/blog/blob/main/bit-operation.md#%E3%83%93%E3%83%83%E3%83%88%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B%E3%81%AE%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3
+//!  [2]: https://github.com/herumi
 
+/// A trait to implement the same algorithm for multiple unsigned integer types. [`u8`], [`u16`], [`u32`], [`u64`] and [`u128`] types
+/// already implement this trait.
+///
+/// ```
+/// use bit_combi_iter::UIntExt;
+///
+/// assert_eq!(0b10010u8.next_combination(), Some(0b10001));
+/// ```
 pub trait UIntExt: Sized + Clone + Copy + PartialEq {
     const ZERO: Self;
+    /// Returns the next bit combination of `self`, which is less than `self`. Returns `None` when `self` is the last combination.
     fn next_combination(self) -> Option<Self>;
 }
 
@@ -28,14 +77,35 @@ macro_rules! impl_uint {
 
 impl_uint![u8 u16 u32 u64 u128];
 
+/// An iterator to iterate all bit combinations less than given unsigned integer value keeping the number of bits. The `U` type
+/// parameter can be [`u8`], [`u16`], [`u32`], [`u64`] or [`u128`] primitive types. Size of this struct is exactly the same as
+/// size of `U`.
 #[derive(Clone, Copy)]
 pub struct BitCombinations<U: UIntExt>(U);
 
 impl<U: UIntExt> BitCombinations<U> {
-    pub fn new(start: U) -> BitCombinations<U> {
-        BitCombinations(start)
+    /// Generates a [`BitCombinations`] instance initializing with state `init`. The instance will iterate all bit combinations
+    /// less than `init`.
+    ///
+    /// ```
+    /// # use bit_combi_iter::BitCombinations;
+    /// let u = 0b11100u8;
+    /// let mut c = BitCombinations::new(u);
+    /// assert_eq!(c.peek().unwrap(), u);
+    /// ```
+    pub fn new(init: U) -> BitCombinations<U> {
+        BitCombinations(init)
     }
 
+    /// Returns the current state. When the iterator was already exhausted, it returns `None`.
+    ///
+    /// ```
+    /// # use bit_combi_iter::BitCombinations;
+    /// let mut c = BitCombinations::new(0b11100u8);
+    /// let u = c.next();
+    /// assert_eq!(c.peek(), u);
+    /// assert_eq!(c.peek(), c.peek());
+    /// ```
     pub fn peek(self) -> Option<U> {
         if self.0 == U::ZERO {
             None
@@ -48,6 +118,7 @@ impl<U: UIntExt> BitCombinations<U> {
 impl<U: UIntExt> Iterator for BitCombinations<U> {
     type Item = U;
 
+    /// Returns the next bit combination. When the iterator finished iterating all combinations, it returns `None`.
     fn next(&mut self) -> Option<Self::Item> {
         let ret = self.0.next_combination();
         self.0 = ret.unwrap_or(U::ZERO);

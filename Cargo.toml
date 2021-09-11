@@ -10,6 +10,15 @@ repository = "https://github.com/rhysd/bit_combi_iter"
 readme = "README.md"
 categories = ["algorithms"]
 keywords = ["bit", "combinations", "iterator"]
+documentation = "https://docs.rs/bit_combi_iter"
+include = [
+    "/src/lib.rs",
+    "/README.md",
+    "/LICENSE.txt",
+]
+
+[badges]
+maintenance = { status = "passively-maintained" }
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

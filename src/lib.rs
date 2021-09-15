@@ -1,5 +1,5 @@
-//! This crate is a small dependency-free crate to enumerate all bit combinations less than given unsigned integer value
-//! keeping the number of bits.
+//! This is a small dependency-free crate to enumerate all bit combinations less than given unsigned integer value
+//! keeping `1`s in the bits.
 //!
 //! ```
 //! use bit_combi_iter::BitCombinations;
@@ -77,7 +77,7 @@ macro_rules! impl_uint {
 
 impl_uint![u8 u16 u32 u64 u128];
 
-/// An iterator to iterate all bit combinations less than given unsigned integer value keeping the number of bits. The `U` type
+/// An iterator to iterate all bit combinations less than given unsigned integer value keeping `1`s in the bits. The `U` type
 /// parameter can be [`u8`], [`u16`], [`u32`], [`u64`] or [`u128`] primitive types. Size of this struct is exactly the same as
 /// size of `U`.
 #[derive(Clone, Copy)]
@@ -97,7 +97,7 @@ impl<U: UIntExt> BitCombinations<U> {
         BitCombinations(init)
     }
 
-    /// Returns the current state. When the iterator was already exhausted, it returns `None`.
+    /// Returns the current state. If the iterator was already exhausted, it returns `None`.
     ///
     /// ```
     /// # use bit_combi_iter::BitCombinations;

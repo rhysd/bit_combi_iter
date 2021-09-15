@@ -4,7 +4,7 @@ bit_combi_iter
 [![CI][ci-badge]][ci]
 
 [bit_combi_iter][crate] is a small dependency-free crate to enumerate all bit combinations less than given unsigned integer value
-keeping the number of bits.
+keeping `1`s in the bits.
 
 ```rust
 use bit_combi_iter::BitCombinations;

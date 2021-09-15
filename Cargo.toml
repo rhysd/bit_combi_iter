@@ -1,6 +1,6 @@
 [package]
 name = "bit_combi_iter"
-version = "1.0.1"
+version = "1.0.2"
 edition = "2018"
 authors = ["rhysd <lin90162@yahoo.co.jp>"]
 description = "An iterator to iterate all bit combinations less than given unsigned integer"

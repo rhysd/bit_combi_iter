@@ -1,3 +1,15 @@
+<a name="v1.0.2"></a>
+# [v1.0.2](https://github.com/rhysd/bit_combi_iter/releases/tag/v1.0.2) - 15 Sep 2021
+
+- Add more package metadata to `Cargo.toml`. Now this package is marked as 'passively-maintained'.
+- Remove unnecessary files from an uploaded package directory.
+- Improve some descriptions in documents.
+
+This version only changes package metadata and docs. No implementation has been changed.
+
+[Changes][v1.0.2]
+
+
 <a name="v1.0.1"></a>
 # [v1.0.1](https://github.com/rhysd/bit_combi_iter/releases/tag/v1.0.1) - 08 Sep 2021
 
@@ -18,6 +30,7 @@ See [README](https://github.com/rhysd/bit_combi_iter#readme) to know how to inst
 [Changes][v1.0.0]
 
 
+[v1.0.2]: https://github.com/rhysd/bit_combi_iter/compare/v1.0.1...v1.0.2
 [v1.0.1]: https://github.com/rhysd/bit_combi_iter/compare/v1.0.0...v1.0.1
 [v1.0.0]: https://github.com/rhysd/bit_combi_iter/tree/v1.0.0
 

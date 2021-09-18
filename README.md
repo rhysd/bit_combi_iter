@@ -39,6 +39,12 @@ BitCombinations::new(0b11100u8)
 // ...
 ```
 
+Implementation of this crate is very efficient:
+
+- [The algorithm to generate the next bit combination][algo] consists of only a few arithmetic calculations, bit operations and
+  shift operations.
+- Size of `BitCombinations<U>` is the same as size of `U`. For example, size of `BitCombinations<u8>` is 8 bytes.
+
 ## Install
 
 Add this crate to dependencies in your `Cargo.toml`.
@@ -56,13 +62,19 @@ See [the API document](https://docs.rs/bit_combi_iter).
 
 The algorithm was borrowed from [the blog post][thanks-herumi] by [@herumi](https://github.com/herumi).
 
+## Bug reporting
+
+Visit [the repository page][repo] and open a new issue.
+
 ## License
 
 Distributed under [the MIT License](./LICENSE.txt).
 
 [crate]: https://crates.io/crates/bit_combi_iter
+[crate-badge]: https://img.shields.io/crates/v/bit_combi_iter.svg
 [ci-badge]: https://github.com/rhysd/bit_combi_iter/actions/workflows/ci.yaml/badge.svg
 [ci]: https://github.com/rhysd/bit_combi_iter/actions/workflows/ci.yaml
+[algo]: https://github.com/rhysd/bit_combi_iter/blob/ae892b741da82334c9e97afd606c3c5c647fd26b/src/lib.rs#L63-L71
 [doc]: https://docs.rs/crate/bit_combi_iter
-[crate-badge]: https://img.shields.io/crates/v/bit_combi_iter.svg
+[repo]: https://github.com/rhysd/bit_combi_iter
 [thanks-herumi]: https://github.com/herumi/blog/blob/main/bit-operation.md#%E3%83%93%E3%83%83%E3%83%88%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B%E3%81%AE%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3

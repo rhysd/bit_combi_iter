@@ -47,6 +47,9 @@
 //! [2]: https://github.com/herumi/blog/blob/main/bit-operation.md#%E3%83%93%E3%83%83%E3%83%88%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B%E3%81%AE%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3
 //! [3]: https://github.com/herumi
 
+#![forbid(unsafe_code)]
+#![warn(clippy::dbg_macro)]
+
 /// A trait to implement the same algorithm for multiple unsigned integer types. [`u8`], [`u16`], [`u32`], [`u64`] and [`u128`] types
 /// already implement this trait.
 ///

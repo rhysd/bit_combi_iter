@@ -43,7 +43,7 @@ Implementation of this crate is very efficient:
 
 - [The algorithm to generate the next bit combination][algo] consists of only a few arithmetic calculations, bit operations and
   shift operations.
-- Size of `BitCombinations<U>` is the same as size of `U`. For example, size of `BitCombinations<u8>` is 8 bytes.
+- Size of `BitCombinations<U>` is the same as size of `U`. For example, size of `BitCombinations<u8>` is 8 bits.
 
 ## Install
 

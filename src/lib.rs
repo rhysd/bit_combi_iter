@@ -39,7 +39,7 @@
 //!
 //! - [The algorithm to generate the next bit combination][1] consists of only a few arithmetic calculations, bit operations and
 //!   shift operations.
-//! - Size of `BitCombinations<U>` is the same as size of `U`. For example, size of `BitCombinations<u8>` is 8 bytes.
+//! - Size of `BitCombinations<U>` is the same as size of `U`. For example, size of `BitCombinations<u8>` is 8 bits.
 //!
 //! The algorithm was borrowed from [the blog post][2] by [@herumi][3].
 //!
